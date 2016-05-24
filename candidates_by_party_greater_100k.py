@@ -46,7 +46,7 @@ with open('presidential_candidates.csv', 'r') as f:
 	reader.next() #skip the headers row
 	for row in reader: #loop through the candidates
 		if row[14] in candidates: #row[14] is the candidate's name
-								  #checks if the current candidate we're looping through is one the candidates listed above
+					  #checks if the current candidate we're looping through is one the candidates listed above
 			party=row[12]
 			c[party]+=1
 

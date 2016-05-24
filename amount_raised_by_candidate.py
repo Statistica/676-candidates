@@ -2,7 +2,6 @@
 # Released under the MIT License (https://opensource.org/licenses/MIT)
 
 import csv, plotly.plotly as plotly, plotly.graph_objs as go, requests
-from collections import Counter
 from bs4 import BeautifulSoup
 
 candidates=[]

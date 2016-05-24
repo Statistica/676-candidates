@@ -10,7 +10,7 @@ with open('presidential_candidates.csv', 'r') as f:
 	reader=csv.reader(f)
 	reader.next() #skip the headers row
 	for row in reader: #loop through the candidates
-		if row[1]=='C': #row[1] is the candidate's status; C means Statutory Candidate
+		if row[1]=='C': #row[1] is the candidate's status; 'C' means statutory candidate
 			party=row[12] #row[12] is the candidate's political party
 			c[party]+=1
 

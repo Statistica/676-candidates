@@ -14,7 +14,7 @@ with open('presidential_candidates.csv', 'r') as f:
 		html=requests.get('https://beta.fec.gov/data/candidate/' + c_id).text #get the candidate's FEC page
 		b=BeautifulSoup(html, 'html.parser')
 		if len(b.find_all(class_='t-big-data'))==0: #if this class isn't found on the candidate's FEC page,
-													#the candidate raised $0
+							    #the candidate raised $0
 			amt=0.0
 		else:
 			amt=float(b.find_all(class_="t-big-data")[0].text.strip().replace("$", "").replace(",", ""))

@@ -9,12 +9,13 @@ candidates=[]
 
 with open('presidential_candidates.csv', 'r') as f:
 	reader=csv.reader(f)
-	reader.next()
-	for row in reader:
-		c_id=row[15]
-		html=requests.get('https://beta.fec.gov/data/candidate/' + c_id).text
+	reader.next() #skip the headers row
+	for row in reader: #loop through the candidates
+		c_id=row[15] #row[15] is the candidate's FEC id
+		html=requests.get('https://beta.fec.gov/data/candidate/' + c_id).text #get the candidate's FEC page
 		b=BeautifulSoup(html, 'html.parser')
-		if len(b.find_all(class_='t-big-data'))==0:
+		if len(b.find_all(class_='t-big-data'))==0: #if this class isn't found on the candidate's FEC page,
+													#the candidate raised $0
 			amt=0.0
 		else:
 			amt=float(b.find_all(class_="t-big-data")[0].text.strip().replace("$", "").replace(",", ""))
@@ -25,10 +26,10 @@ with open('presidential_candidates.csv', 'r') as f:
 			#.replace("$", "") removes the dollar sign	
 			#.replace(",", "") removes all commas
 			#we should be left with the total amount raised in the form 0.00
-		name=row[14]
+		name=row[14] #row[14] is the candidate's name
 		candidates.append({'name': name, 'amount': amt})
 
-candidates=sorted(candidates, key=lambda k: k['amount'])	
+candidates=sorted(candidates, key=lambda k: k['amount']) #sort the candidates by amount raised	
 
 trace=go.Bar(
 	x=[candidate['name'] for candidate in candidates],
